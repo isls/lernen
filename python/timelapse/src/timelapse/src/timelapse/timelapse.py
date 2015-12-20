@@ -1,5 +1,7 @@
 import picamera
 import logging
+import RPi.GPIO as GPIO
+import time
 from PIL import Image, ImageChops
 from time import sleep
 
@@ -11,9 +13,9 @@ PATH = 'tlphotos/'
 FILENAME_DIFF_IMAGE = 'tmpDiffPicture.jpg'
 FILENAME_TMP_IMAGE = 'tmpPicture.jpg'
 THRESHOLD = 0.0001
-SLEEP_DIFF_SEC = 3
-SLEEP_TIMELAPSE_SEC = 0.1
-NUMBER_OF_PICTURES = 20
+SLEEP_DIFF_SEC = 5
+SLEEP_TIMELAPSE_SEC = 0.2
+NUMBER_OF_PICTURES = 5
 TIME_LAPSE = 100000
 
 # image1 grayscaled image
@@ -52,7 +54,8 @@ def watch(camera):
     logging.info('Difference: ' + str(brigthDarkRatio))
     if (brigthDarkRatio >  THRESHOLD):
         logging.info('start time-lapse: number of pictures ' + str(NUMBER_OF_PICTURES) + '  every ' + str(SLEEP_TIMELAPSE_SEC) + ' second(s)')
-        takePictures(camera)
+        print('ALARM !!!!')
+	takePictures(camera)
     else:
         logging.info('no difference, wait for ' + str(SLEEP_DIFF_SEC) + ' seconds')
         sleep(SLEEP_DIFF_SEC)
@@ -63,8 +66,9 @@ def takePictures(camera):
     camera.resolution = (1920, 1080)
     camera.color_effects = None
     for i, filename in enumerate(camera.capture_continuous(PATH + '{timestamp:%y%m%d%H%M%S%f}_time-lapse_{counter:03d}.jpg')):
-        print(filename)
+        GPIO.output(led,GPIO.HIGH)
         sleep(SLEEP_TIMELAPSE_SEC)
+        GPIO.output(led,GPIO.LOW)
         if i == NUMBER_OF_PICTURES-1:
             break
 
@@ -75,10 +79,16 @@ def initCamera(camera):
 if __name__ == "__main__":
     logging.basicConfig(filename='timelapse.log',level=logging.INFO)
     logging.info('start camera')
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    led = 17 
+    GPIO.setup(led,GPIO.OUT)
     with picamera.PiCamera() as camera:
+	GPIO.output(led,GPIO.HIGH)
         camera.start_preview()
-        sleep(2)
-        camera.stop_preview()        
+        sleep(20)
+        camera.stop_preview()
+        GPIO.output(led,GPIO.LOW)        
         initCamera(camera)
         logging.info('start time-lapse')
         for i in range(TIME_LAPSE):
