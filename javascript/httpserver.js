@@ -12,6 +12,6 @@ var server = http.createServer(function(request, response) {
   response.write('</html>');
   response.end();
 });
-
+console.log('Server wird gestartet.')
 server.listen(8080);
 console.log('Server ist gestartet.');
