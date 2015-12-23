@@ -7,7 +7,7 @@ var server = http.createServer(function(request, response) {
   response.write('<title>Lauri\' Seite</title>');
   response.write('</head>');
   response.write('<body>');
-  response.write('Hallo lieber Lauri, wie geht es Dir?');
+  response.write('Hallo lieber Lauri, wie geht es dir?');
   response.write('</body>');
   response.write('</html>');
   response.end();
