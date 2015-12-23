@@ -4,7 +4,7 @@ var server = http.createServer(function(request, response) {
   response.write('<!DOCTYPE "html">');
   response.write('<html>');
   response.write('<head>');
-  response.write('<title>Hello World Page</title>');
+  response.write('<title>Lauri\' Seite</title>');
   response.write('</head>');
   response.write('<body>');
   response.write('Hallo lieber Lauri, wie geht es Dir?');
@@ -14,4 +14,4 @@ var server = http.createServer(function(request, response) {
 });
 
 server.listen(8080);
-console.log('Server is listening');
+console.log('Server ist gestartet');
