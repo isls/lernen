@@ -1,10 +1,13 @@
 var x = 10;
-console.log("Ergebnis für x=" + x + " = " + addMultiple(10));
+var y = 1
+console.log("x = " + x);
+console.log("y = " + y);
+var c =  x + y;
+console.log("x + y = " + c )
+var d = addiere(x, y);
+console.log("x + y = " + d )
 
-function addMultiple(x) {
-    var ergebnis = 0;
-    for (let zahl = 0; zahl < x; zahl++) {
-        ergebnis = ergebnis + zahl;
-    }
-    return ergebnis;
+
+function addiere(a, b) {
+    return a + b;
 } 
