@@ -7,7 +7,6 @@ console.log("x + y = " + c )
 var d = addiere(x, y);
 console.log("x + y = " + d )
 
-
 function addiere(a, b) {
     return a + b;
 } 
