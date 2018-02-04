@@ -1,9 +1,9 @@
-function Circle(x, y, r) {
-  function r_squared() {
+function Circle (x, y, r) {
+  function squared () {
     return Math.pow(r, 2);
   }
-  function area() {
-    return Math.PI * r_squared();
+  function area () {
+    return Math.PI * squared();
   }
   return {
     area: area

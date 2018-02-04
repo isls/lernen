@@ -1,3 +1,2 @@
 // Hello Worlf for nodejs
-console.log("Hallo Welt!");
-
+console.log('Hallo Welt!');
